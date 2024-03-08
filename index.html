@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelBran's Boutique</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+    <header>
+        <h1>Welcome to HelBran's Boutique</h1>
+        <nav>
+            <ul>
+                <li><a href="#products">Shop</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="welcome">
+            <h2>Discover Fashion!</h2>
+            <p>Explore our exclusive collection of fashion and accessories.</p>
+        </section>
+        <section id="products">
+            <h2>Our Products</h2>
+            <!-- Placeholder for product listings -->
+        </section>
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required placeholder="Winny">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Winffredkalondu@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 HelBran's Boutique</p>
+    </footer>
+
+    <script>
+        // Example product array
+        const productsSection = document.getElementById('products');
+
+        fetch('http://localhost:8000/api/products').then((data) => data.json()).then((data) => {
+        const products = data.products
+
+        products.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.innerHTML = `
+                <h3>${product.name}</h3>
+                <p>${product.price}</p>
+                <img src="http://localhost:8000/${product.imageUrl}" alt="${product.name}" style="width: 100%; max-width: 200px; height: auto; margin-bottom: 10px;">
+            `;
+            productsSection.appendChild(productElement);
+        });
+    })
+    </script>
+</body>
+</html>
+<script>
+
+    fetch('http://localhost:8000/api').then((data) => data.json()).then((data) => {
+        var body = document.querySelectorAll('body')[0]
+        data.users.forEach((u) => {
+            var p = document.createElement('p')
+            p.innerHTML = u.firstName
+            body.appendChild(p)
+        })
+        console.log(data)
+    });
+</script>
